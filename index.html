@@ -26,7 +26,7 @@
   .verse{background:var(--sand);border-left:4px solid var(--sun);border-radius:0 12px 12px 0;padding:10px 14px;font-family:var(--serif);font-style:italic;}
   .verse small{display:block;font-family:var(--sans);font-style:normal;color:var(--soft);margin-top:4px;}
   nav{position:fixed;left:0;right:0;bottom:0;background:#FFFDF7;border-top:1px solid var(--line);display:flex;padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:10;}
-  nav button{flex:1;background:none;border:none;color:var(--soft);font-size:10.5px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:10px;font-family:var(--sans);}
+  nav button{flex:1;background:none;border:none;color:var(--soft);font-size:9.5px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:10px;font-family:var(--sans);}
   nav button.on{color:var(--leaf-d);font-weight:700;}
   nav button span{font-size:19px;}
   .btn{background:var(--leaf);color:#fff;border:none;border-radius:10px;padding:10px 16px;font-size:13.5px;font-weight:700;font-family:var(--sans);}
@@ -43,11 +43,29 @@
   .kid:first-child{border-top:none;margin-top:0;padding-top:0;}
   .kid b{font-size:15px;}
   .tag{display:inline-block;background:var(--sun-soft);color:#7A5A17;font-size:11px;font-weight:700;border-radius:12px;padding:2px 10px;margin:4px 0;}
+  .tag.sample{background:#DCE7D4;color:#48603F;}
   .show{border-left:4px solid var(--leaf);background:#fff;border-radius:0 10px 10px 0;padding:8px 12px;margin:8px 0;font-size:13.5px;}
   .show small{color:var(--soft);}
+  .hint{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:var(--sun-soft);color:#7A5A17;border:none;font-size:11px;font-weight:800;vertical-align:middle;margin-left:4px;font-family:var(--sans);}
+  .hintbox{display:none;background:var(--sand);border-radius:10px;padding:8px 12px;font-size:13px;margin:6px 0;}
+  .hintbox.open{display:block;}
+  .empty{background:var(--sand);border-radius:12px;padding:14px;text-align:center;font-size:13.5px;color:var(--soft);}
+  .ms{border-left:3px solid var(--line);padding:4px 0 4px 12px;margin:8px 0;font-size:13.5px;}
+  .ms small{color:var(--soft);}
+  .ms.star{border-left-color:var(--sun);background:#FFF6E0;border-radius:0 10px 10px 0;padding:8px 8px 8px 12px;}
+  .ms button{background:none;border:none;font-size:12px;color:var(--soft);padding:2px 6px 2px 0;font-family:var(--sans);}
+  .ms button.lit{color:#B07E1F;font-weight:800;}
+  .ov{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:8px 0;}
+  .ov .dot{flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:var(--sun-soft);display:flex;align-items:center;justify-content:center;font-size:18px;}
+  .ov small{color:var(--soft);}
+  .fab{position:fixed;top:10px;right:10px;z-index:20;background:#FFFDF7;border:1.5px solid var(--sun);color:#7A5A17;border-radius:20px;padding:7px 12px;font-size:12px;font-weight:700;font-family:var(--sans);box-shadow:0 2px 8px rgba(0,0,0,0.15);}
+  .overlay{position:fixed;inset:0;background:rgba(58,46,34,0.55);z-index:30;display:flex;align-items:center;justify-content:center;padding:20px;}
+  .overlay[hidden]{display:none;}
+  .sheet{background:var(--card);border-radius:16px;max-width:520px;width:100%;max-height:85vh;overflow:auto;padding:22px;}
+  .sheet h2{margin-top:0;}
   .hide-print{}
   @media print{
-    nav,.hide-print,header{display:none !important;}
+    nav,.hide-print,.fab,.overlay{display:none !important;}
     body{padding:0;background:#fff;}
     .wrap{max-width:100%;}
     .card{border:1px solid #999;break-inside:avoid;}
@@ -55,7 +73,31 @@
 </style>
 </head>
 <body>
-<header><h1>☀ Dayspring School</h1><p>A free model for Christian early education — Nursery to Primary 5</p></header>
+<button class="fab hide-print" onclick="openHow()">❓ How this app works</button>
+<div class="overlay" id="welcome" hidden>
+  <div class="sheet">
+    <h2>☀ Welcome to Dayspring School</h2>
+    <p>This is a <b>free</b> learning plan for young children (Nursery to Primary 5). There are <b>no fees, no exams, and no grades</b>.</p>
+    <p>Every child learns to <b>read 📖, write ✏️, and speak 💬</b> at their own pace. You can track each child, write simple notes, and print daily lessons — everything stays on this device.</p>
+    <p><button class="btn" onclick="closeWelcome()">Get Started →</button></p>
+  </div>
+</div>
+<div class="overlay" id="howbox" hidden>
+  <div class="sheet">
+    <h2>How this app works</h2>
+    <ol>
+      <li><b>☀ Home</b> — the idea behind Dayspring, plus today's verse.</li>
+      <li><b>🌱 Journey</b> — what one child's path looks like.</li>
+      <li><b>📖 Lesson</b> — today's skill, handiwork, and reflection. Print it for class.</li>
+      <li><b>👧🏾 Children</b> — add each child; tap what they are <i>working on right now</i> (📖 reading, ✏️ writing, or 💬 speaking); jot a short note; log milestones and celebrate them 🎉.</li>
+      <li><b>🏫 Class</b> — everyone at a glance.</li>
+      <li><b>🧺 Showcase</b> — hands-on work children practiced.</li>
+      <li><b>🤝 Guide</b> — how to group a child, and why there are no grades.</li>
+    </ol>
+    <p><button class="btn2" onclick="closeHow()">Close</button></p>
+  </div>
+</div>
+<header><h1>☀ Dayspring School</h1><p>A free model for Christian early education — Nursery to Primary 5 · works offline</p></header>
 <div class="wrap" id="app"></div>
 <nav id="nav"></nav>
 
@@ -69,23 +111,33 @@ var SCRIPTURES = [
   {t:"If any man will come after me, let him deny himself, and take up his cross daily.", r:"Luke 9:23 — daily, not once."},
   {t:"My sheep hear my voice, and I know them, and they follow me.", r:"John 10:27 — listening is the first lesson."}
 ];
-var GROUPS = ["Growing in Reading","Growing in Writing","Growing in Speaking"];
+var GROUPS = [
+  {n:"Growing in Reading", i:"📖"},
+  {n:"Growing in Writing", i:"✏️"},
+  {n:"Growing in Speaking", i:"💬"}
+];
 var TABS = [
   {id:"home", e:"☀", l:"Home"},{id:"journey", e:"🌱", l:"Journey"},
   {id:"lesson", e:"📖", l:"Lesson"},{id:"kids", e:"👧🏾", l:"Children"},
-  {id:"show", e:"🧺", l:"Showcase"},{id:"guide", e:"🤝", l:"Guide"}
+  {id:"class", e:"🏫", l:"Class"},{id:"show", e:"🧺", l:"Showcase"},
+  {id:"guide", e:"🤝", l:"Guide"}
 ];
 var LESSON = {
   skill:"Core skill — Reading: blend three-letter sounds (c-a-t says cat). Each child reads five words aloud, no rushing, no ranking.",
   vocation:"Vocation — Sweeping & sorting: sweep the classroom in pairs, then sort bottle caps by colour. Hands learn diligence.",
   reflect:"Reflection — Christ washed His disciples' feet. The greatest work today is serving someone quietly."
 };
+var SAMPLE_KID = {name:"Adaeze (sample)", group:"Growing in Speaking", sample:true,
+  note:"Speaks confidently; beginning to blend letter sounds.",
+  milestones:[{t:"Joined the speaking circle", day:"2026-09-01", star:false},{t:"Blended her first three words aloud", day:"2026-09-20", star:true}]};
 
 function load(k,f){ try{ var v = localStorage.getItem(k); return v ? JSON.parse(v) : f; }catch(e){ return f; } }
 function save(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 var tab = "home";
-var kids = load("ds_kids", []);
+var kids = load("ds_kids", null);
+if(!kids){ kids = [JSON.parse(JSON.stringify(SAMPLE_KID))]; save("ds_kids", kids); }
 var showcase = load("ds_show", []);
+kids.forEach(function(k){ if(!k.milestones) k.milestones = []; });
 
 function todayVerse(){
   var now = new Date(), start = new Date(now.getFullYear(),0,0);
@@ -93,6 +145,12 @@ function todayVerse(){
   return SCRIPTURES[day % SCRIPTURES.length];
 }
 function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+function gIcon(n){ var g = GROUPS.filter(function(x){return x.n===n;})[0]; return g ? g.i+" " : ""; }
+
+window.openHow = function(){ document.getElementById("howbox").hidden = false; };
+window.closeHow = function(){ document.getElementById("howbox").hidden = true; };
+window.closeWelcome = function(){ save("ds_welcome", 1); document.getElementById("welcome").hidden = true; };
+window.hint = function(btn, id){ document.getElementById(id).classList.toggle("open"); };
 
 function render(){
   var nav = document.getElementById("nav"); nav.innerHTML = "";
@@ -108,6 +166,7 @@ function render(){
   else if(tab==="journey") a.innerHTML = vJourney();
   else if(tab==="lesson") a.innerHTML = vLesson();
   else if(tab==="kids") a.innerHTML = vKids();
+  else if(tab==="class") a.innerHTML = vClass();
   else if(tab==="show") a.innerHTML = vShow();
   else a.innerHTML = vGuide();
 }
@@ -116,12 +175,14 @@ function vHome(){
   var h = "<div class='card'><h2>Vision</h2><p>A free, pressure-free model from Nursery to Primary 5, built on one goal: every child learns to read, write, and communicate — because once they can, they can know Christ for themselves. No child is ranked, segregated, or labeled.</p></div>";
   h += "<div class='card'><h2>Today's Scripture</h2><div class='verse'>“"+esc(v.t)+"”<small>"+esc(v.r)+"</small></div></div>";
   h += "<div class='card'><h2>Core Principles</h2><ol><li><b>Free</b> — no fees, no payment, ever.</li><li><b>No grade hierarchy</b> — one continuous journey.</li><li><b>Flexible ability grouping</b> — children move as they grow.</li><li><b>Core foundation, kept simple</b> — reading, writing, communication.</li><li><b>Vocation from the start</b> — hands-on skills alongside the core.</li><li><b>One goal, equal for all.</b></li><li><b>Christ and denial of flesh</b> — woven through daily learning.</li></ol></div>";
+  h += "<div class='card'><h2>Why no grades?</h2><p>Grades rank children against each other and teach them they <i>are</i> a score. Here we only record what a child is <b>working on now</b> and what they have <b>grown into</b> — every child reaches the same destination, at their own pace, without being told they are more or less capable.</p></div>";
+  h += "<div class='card'><h2>📴 Works offline</h2><p style='color:var(--soft)'>This whole app is one file on your device. After opening it once, it keeps working with no internet, no account, and no cost.</p></div>";
   return h;
 }
 function vJourney(){
   return "<div class='card'><h2>Sample Child Journey</h2>"
     + "<p><b>Adaeze</b> joined able to speak confidently but not yet blend letter sounds.</p>"
-    + "<p>She began in <span class='tag'>Growing in Speaking</span>, and as her listening grew she started sitting with the reading circle too — now she moves freely between <span class='tag'>Growing in Speaking</span> and <span class='tag'>Growing in Reading</span>.</p>"
+    + "<p>She began in <span class='tag'>💬 Growing in Speaking</span>, and as her listening grew she started sitting with the reading circle too — now she moves freely between <span class='tag'>💬 Growing in Speaking</span> and <span class='tag'>📖 Growing in Reading</span>.</p>"
     + "<p>No label followed her. Her group describes what she is <i>practicing now</i>, not what she <i>is</i>.</p></div>";
 }
 function vLesson(){
@@ -133,17 +194,36 @@ function vLesson(){
     + "<h3>Scripture of the day</h3><div class='verse'>“"+esc(v.t)+"”<small>"+esc(v.r)+"</small></div>"
     + "<p class='hide-print' style='margin-top:14px'><button class='btn' onclick='window.print()'>🖨 Print this lesson</button></p></div>";
 }
+function kidBlock(k,i){
+  var h = "<div class='kid'><b>"+esc(k.name)+"</b> ";
+  if(k.sample) h += "<span class='tag sample'>sample</span> ";
+  h += "<span class='tag'>"+esc(gIcon(k.group)+k.group)+"</span>";
+  h += "<div><label>What is this child working on right now?<button class='hint' onclick=\"hint(this,'h"+i+"')\">?</button></label><div class='hintbox' id='h"+i+"'>Tap the area they are practicing most — reading 📖, writing ✏️, or speaking 💬. Move them whenever they grow; groups are practice areas, not labels.</div></div><div class='grp'>";
+  GROUPS.forEach(function(g){
+    h += "<button class='"+(g.n===k.group?"on":"")+"' onclick='moveKid("+i+",\""+g.n+"\")'>"+g.i+" "+g.n.replace("Growing in ","")+"</button>";
+  });
+  h += "</div><label>Progress note (no scores)</label><textarea oninput='noteKid("+i+",this.value)' placeholder='e.g. Blended her first three words today.'>"+esc(k.note||"")+"</textarea>";
+  h += "<label>Growth timeline — small steps, no scores<button class='hint' onclick=\"hint(this,'t"+i+"')\">?</button></label><div class='hintbox' id='t"+i+"'>Write down moments of growth as plain sentences with the date. Tap 🎉 on the big ones to celebrate them.</div><div id='ms"+i+"'>";
+  (k.milestones||[]).forEach(function(m,j){
+    h += "<div class='ms"+(m.star?" star":"")+"'>"+(m.star?"🎉 ":"")+esc(m.t)+"<br><small>"+esc(m.day)+" · <button class='"+(m.star?"lit":"")+"' onclick='starMs("+i+","+j+")'>"+(m.star?"★ celebrated":"☆ celebrate")+"</button> · <button onclick='delMs("+i+","+j+")'>remove</button></small></div>";
+  });
+  h += "</div><div class='row'><input type='text' id='msin"+i+"' placeholder='e.g. Read a full sentence today' maxlength='120'><button class='btn2' onclick='addMs("+i+")'>Log</button></div>";
+  h += "<p><button class='btn2' onclick='delKid("+i+")'>Remove child</button></p></div>";
+  return h;
+}
 function vKids(){
-  var h = "<div class='card'><h2>Ability-Group Tracker</h2><p style='color:var(--soft);font-size:13px'>Groups describe what a child is practicing now — never a rank or label. Saved in this browser only.</p>";
-  h += "<div class='row'><input type='text' id='newKid' placeholder='Child\u2019s name' maxlength='40'><button class='btn' onclick='addKid()'>Add</button></div>";
-  if(!kids.length) h += "<p style='color:var(--soft)'>No children added yet.</p>";
-  kids.forEach(function(k,i){
-    h += "<div class='kid'><b>"+esc(k.name)+"</b> <span class='tag'>"+esc(k.group)+"</span><div class='grp'>";
-    GROUPS.forEach(function(g){
-      h += "<button class='"+(g===k.group?"on":"")+"' onclick='moveKid("+i+",\""+g+"\")'>"+g.replace("Growing in ","")+"</button>";
-    });
-    h += "</div><label>Progress note (no scores)</label><textarea oninput='noteKid("+i+",this.value)' placeholder='e.g. Blended her first three words today.'>"+esc(k.note||"")+"</textarea>";
-    h += "<p><button class='btn2' onclick='delKid("+i+")'>Remove</button></p></div>";
+  var h = "<div class='card'><h2>👧🏾 Children</h2><p style='color:var(--soft);font-size:13px'>Groups describe what a child is practicing now — never a rank or label. Saved in this browser only.</p>";
+  h += "<div class='row'><input type='text' id='newKid' placeholder='Child\u2019s name' maxlength='40'><button class='btn' onclick='addKid()'>Add a Child</button></div>";
+  if(!kids.length) h += "<div class='empty'>No children added yet — tap “Add a Child” to begin. 🌱</div>";
+  kids.forEach(function(k,i){ h += kidBlock(k,i); });
+  return h + "</div>";
+}
+function vClass(){
+  var h = "<div class='card'><h2>🏫 Class overview</h2><p style='color:var(--soft);font-size:13px'>Everyone at a glance — what each child is working on now.</p>";
+  if(!kids.length) h += "<div class='empty'>No children added yet — tap “Add a Child” on the Children tab to begin. 🌱</div>";
+  kids.forEach(function(k){
+    var last = (k.milestones||[]).slice(-1)[0];
+    h += "<div class='ov'><div class='dot'>"+esc((gIcon(k.group)||"🌱").trim())+"</div><div><b>"+esc(k.name)+"</b><br><small>"+esc(k.group)+(last ? " · latest: "+esc(last.t) : (k.note ? " · "+esc(k.note.slice(0,60)) : " · just getting started 🌱"))+"</small></div></div>";
   });
   return h + "</div>";
 }
@@ -152,7 +232,7 @@ function vShow(){
   h += "<label>Child's name (optional)</label><input type='text' id='swWho' placeholder='e.g. Adaeze' maxlength='40'>";
   h += "<label>What did they practice?</label><textarea id='swWhat' placeholder='e.g. Swept the classroom and sorted caps by colour.'></textarea>";
   h += "<p><button class='btn' onclick='addShow()'>Add to showcase</button></p>";
-  if(!showcase.length) h += "<p style='color:var(--soft)'>Nothing showcased yet.</p>";
+  if(!showcase.length) h += "<div class='empty'>Nothing showcased yet — add a child's handiwork above. 🧺</div>";
   showcase.forEach(function(s,i){
     h += "<div class='show'>"+esc(s.what)+"<br><small>"+esc(s.who||"A Dayspring child")+" · "+esc(s.day)+" · <a href='#' onclick='delShow("+i+");return false'>remove</a></small></div>";
   });
@@ -166,16 +246,24 @@ function vGuide(){
     + "<li><b>One group at a time is fine — two is fine too.</b> A child may speak fluently while still growing in writing.</li>"
     + "<li><b>Move freely.</b> Review weekly; move a child the moment they are ready. No ceremony, no announcement.</li>"
     + "<li><b>Never rank groups.</b> Reading is not above speaking. All groups walk the same road.</li>"
-    + "<li><b>Notes, not scores.</b> Write what you saw (“read five words aloud”), not a number.</li></ol></div>";
+    + "<li><b>Notes, not scores.</b> Write what you saw (“read five words aloud”), not a number.</li></ol></div>"
+    + "<div class='card'><h2>Why no grades?</h2><p>Grades rank children against each other and teach them they <i>are</i> a score. Dayspring records only what a child is <b>working on now</b> and the <b>milestones they have grown into</b> — the same destination for every child, reached at their own pace.</p></div>";
 }
 window.addKid = function(){
   var el = document.getElementById("newKid"), n = el.value.trim();
   if(!n) return;
-  kids.push({name:n, group:GROUPS[0], note:""}); save("ds_kids", kids); render();
+  kids.push({name:n, group:GROUPS[0].n, note:"", milestones:[]}); save("ds_kids", kids); render();
 };
 window.moveKid = function(i,g){ kids[i].group = g; save("ds_kids", kids); render(); };
 window.noteKid = function(i,v){ kids[i].note = v; save("ds_kids", kids); };
 window.delKid = function(i){ kids.splice(i,1); save("ds_kids", kids); render(); };
+window.addMs = function(i){
+  var el = document.getElementById("msin"+i), t = el.value.trim(); if(!t) return;
+  kids[i].milestones.push({t:t, day:new Date().toISOString().slice(0,10), star:false});
+  save("ds_kids", kids); render();
+};
+window.starMs = function(i,j){ kids[i].milestones[j].star = !kids[i].milestones[j].star; save("ds_kids", kids); render(); };
+window.delMs = function(i,j){ kids[i].milestones.splice(j,1); save("ds_kids", kids); render(); };
 window.addShow = function(){
   var w = document.getElementById("swWhat").value.trim(); if(!w) return;
   var who = document.getElementById("swWho").value.trim();
@@ -183,6 +271,7 @@ window.addShow = function(){
   save("ds_show", showcase); render();
 };
 window.delShow = function(i){ showcase.splice(i,1); save("ds_show", showcase); render(); };
+if(!load("ds_welcome", 0)) document.getElementById("welcome").hidden = false;
 render();
 </script>
 </body>
