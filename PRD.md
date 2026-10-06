@@ -44,6 +44,36 @@ Christ for themselves. No child is ranked, segregated, or labeled.
 - **Printable daily lesson card** — formats the day's lesson for
   printing, for classrooms with limited device access.
 
+## Added Features (Phase 3 — Layman Usability)
+- A one-time welcome screen in plain language explaining what
+  Dayspring School is and how to use it, with a "Get Started" button.
+- Plain-language labels throughout (e.g. "What is this child
+  working on right now?" instead of "Ability Group").
+- An always-visible "How this app works" button opening a short
+  guide covering the whole app, including how grouping works.
+- A pre-loaded sample child shown by default, so a first-time
+  user sees a real example instead of an empty screen.
+- Small "?" hint icons next to unfamiliar terms, showing a
+  one-sentence plain explanation when tapped.
+- Friendly empty-state messages (e.g. "No children added yet —
+  tap 'Add a Child' to begin") instead of blank sections.
+- A short "Why no grades?" explainer answering the most likely
+  question a newcomer will have about the model.
+- Icons alongside text labels (book, pencil, speech bubble) to
+  aid understanding even before reading.
+
+## Added Features (Phase 4 — Growth & Reliability)
+- A simple growth timeline per child: a plain log of milestones
+  (e.g. "Started reading short words — March") instead of scores,
+  showing progress without ranking.
+- Celebration moments: a simple way to mark a milestone for a
+  child (e.g. "Ade read their first full sentence today!") without
+  comparing children to each other.
+- A class/group overview screen showing all children at a glance
+  and what each is currently working on.
+- Offline support: the app continues to work fully after the
+  first load, even with no internet connection.
+
 All features run with no backend, no paid service, and no
 sign-in — data is saved in the browser (localStorage).
 
